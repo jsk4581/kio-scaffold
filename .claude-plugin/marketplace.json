@@ -1,0 +1,15 @@
+{
+  "name": "kio-scaffold",
+  "owner": {
+    "name": "jsk4581",
+    "email": "jsk4581@gmail.com"
+  },
+  "plugins": [
+    {
+      "name": "harness",
+      "source": "./plugins/harness",
+      "description": "Harness Engineering toolkit — scaffold a project's AI work environment (CLAUDE.md, .claude/rules/, role-based folders). Provides /harness:scaffold.",
+      "license": "MIT"
+    }
+  ]
+}
