@@ -17,6 +17,7 @@ description: Bootstrap a project's AI work environment (harness) — generates C
 - **기술 스택** — 코드 스타일·테스트·보안 규칙의 glob과 기본값을 결정 (예: TS/React, Python/FastAPI, Go)
 - **포함할 규칙 모듈** — code-style(항상) / testing / security 중 무엇
 - **이미 있는 폴더 구조** — 기존 레이아웃이 있으면 덮어쓰지 말고 맞춘다
+- **에이전트 협업** 여부 — 여러 에이전트/세션이 이어서·동시에 작업하나? 그렇다면 `.dev/collab/`(인계·조율) 규약을 포함한다. 단일 에이전트면 빼서 단순하게 둔다.
 - **이중 안전장치 Hook** 추가 여부 (force-push 차단 등)
 
 ### 2. 템플릿 로드 + 채우기
@@ -32,6 +33,15 @@ description: Bootstrap a project's AI work environment (harness) — generates C
 
 ### 4. 선택 항목
 - **폴더 단위 CLAUDE.md** — 전역과 다른 특수 제약이 있는 폴더에만. 템플릿: `assets/template/src/auth/CLAUDE.md.example`. (모든 폴더에 만들지 않는다.)
+- **에이전트 협업 (`.dev/collab/`)** — 여러 에이전트/세션이 협업할 때만 추가한다.
+  - 복사: `assets/template/.dev/collab/`의 `README.md` · `handoff/TEMPLATE.md` · `BOARD.md` · `DECISIONS.md` · `claims/`.
+  - 루트 `.gitignore`에 다음을 보장(없으면 추가, 중복 금지) — 휘발성 상태만 추적 제외:
+    ```
+    # .dev/collab/ 라이브 협업 상태 (휘발성 — 커밋 안 함)
+    /.dev/collab/BOARD.md
+    /.dev/collab/claims/
+    ```
+  - 단일 에이전트면 **생성하지 않는다**(빈 조율 폴더는 노이즈). CLAUDE.md의 협업 안내 줄(`<!-- 단일 에이전트면 이 줄 삭제 -->`)도 함께 정리한다.
 - **Hook** — `.claude/settings.json`의 PreToolUse로 `git push --force` 차단(CLAUDE.md 금지 + Hook = 이중 안전장치).
 
 ### 5. 마무리 보고
@@ -43,8 +53,11 @@ description: Bootstrap a project's AI work environment (harness) — generates C
 - [ ] CLAUDE.md는 지도 수준으로 짧다 (≤120줄)
 - [ ] 규칙은 항상-로드 / glob 조건부-로드로 올바르게 분리했다
 - [ ] 기존 파일을 덮어쓸 땐 확인받았다
-- [ ] 폴더 단위 CLAUDE.md·Hook은 필요할 때만 추가했다
+- [ ] 폴더 단위 CLAUDE.md·Hook·`.dev/collab/`는 필요할 때만 추가했다
+- [ ] `.dev/collab/`를 넣었다면 루트 `.gitignore`에 `BOARD.md`·`claims/`를 추적 제외했다
 
 ## 점검 (이미 셋업된 프로젝트)
 신규 셋업이 아니라 점검 요청이면: 위 구조 대비 빠진 것(분리 안 된 docs/.dev, 비대한 CLAUDE.md,
 중복 규칙, 안 쓰는 설정)을 진단하고 개선안을 제시한다 — 추가가 아니라 **단순화**가 기본 방향.
+- `.dev/collab/`가 있으면: 끝난 작업의 죽은 `claims/` 락·`BOARD.md` 줄이 쌓였는지, `BOARD.md`/`claims/`가 git에 추적되고 있진 않은지(분리 위반) 점검한다.
+- 협업이 실제로 없는데 `collab/`만 비어 있으면 → 지우는 쪽을 제안한다.

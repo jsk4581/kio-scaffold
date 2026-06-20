@@ -32,6 +32,7 @@ alwaysApply: true
 | 테스트 | `tests/` (소스 옆에 흩뿌리지 않는다) |
 | 사람이 읽는 문서 (스펙·룰·ADR) | `docs/` |
 | AI가 남기는 기록 (로그·learnings) | `.dev/` |
+| 에이전트 간 인계·조율 (인수인계서·작업보드·선점) | `.dev/collab/` (규약: `collab/README.md`, 여러 에이전트 협업 시에만) |
 | **절대 수정 금지** | `out/`, `dist/`, 빌드 산출물, `*.lock` |
 
 → 둘 위치가 모호하면 **새 패턴을 발명하지 말고 먼저 물어본다.**
@@ -43,6 +44,15 @@ alwaysApply: true
 - **`docs/` = 사람의 책임 · 비즈니스의 진실** — 도메인 정의, 비즈니스 룰, API 스펙, ADR, 온보딩.
 - **`.dev/` = AI의 작업 흔적** — troubleshooting 기록, 작업 로그, 실험 결과, 스크래치패드.
 - AI는 작업 **전** `docs/`를 참고하고, 작업 **중/후** 배운 것을 `.dev/`에 남긴다.
+
+## 에이전트 간 협업: `.dev/collab/` (여러 에이전트로 일할 때만)
+
+여러 에이전트/세션이 한 프로젝트를 **이어서·동시에** 작업하면 조율 상태를 파일로 공유한다. 단일 에이전트면 만들지 않는다.
+
+- **시작 전** `collab/handoff/`(이어받을 작업)와 `collab/BOARD.md`(진행 중)를 먼저 읽는다 — 같은 작업을 중복으로 잡지 않게.
+- **선점**은 `collab/claims/<task>.md`로 표시하고 `BOARD.md`에 한 줄. **넘길 때**는 `collab/handoff/<topic>.md`에 인수인계서.
+- **git 분리**: 인계서(`handoff/`)·결정(`DECISIONS.md`)은 **커밋**, 라이브 상태(`BOARD.md`)·락(`claims/`)은 **gitignore**(휘발성·머지 충돌 방지).
+- 상세 프로토콜은 `.dev/collab/README.md`.
 
 ## 설정 스코프: User → Project → Folder (하위가 상위를 덮어쓴다)
 

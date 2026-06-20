@@ -36,10 +36,15 @@ your-project/
 │   └── security.md                 # glob 조건부 로드
 ├── docs/        # 사람이 관리하는 문서 (비즈니스 진실)
 ├── .dev/        # AI가 남기는 작업 기록
+│   └── collab/  # (선택) 에이전트 간 협업 — 인수인계서·작업보드·선점
 ├── src/  tests/  out/
 ```
 
 핵심 원칙: User→Project→Folder 스코프 상속, Progressive Disclosure, 경계의 이중 안전장치, "좋은 Harness는 점점 단순해진다".
+
+> **에이전트 간 협업** (선택): 여러 에이전트/세션이 이어서·동시에 작업할 때 `.dev/collab/`로 조율한다 —
+> 인수인계서(`handoff/`)·작업보드(`BOARD.md`)·선점 락(`claims/`). 오래 남길 인계서·결정은 git에 커밋,
+> 휘발성 보드·락은 gitignore. 단일 에이전트면 만들지 않는다.
 
 ## 레포 구조
 

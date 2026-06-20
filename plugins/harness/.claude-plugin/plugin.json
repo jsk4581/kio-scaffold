@@ -1,7 +1,7 @@
 {
   "name": "harness",
   "displayName": "Harness Engineering",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Bootstrap and maintain a project's AI work environment following Harness Engineering principles. Includes /harness:scaffold for generating CLAUDE.md, .claude/rules/, and a role-based folder structure.",
   "author": {
     "name": "jsk4581",
