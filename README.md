@@ -86,7 +86,7 @@ claude plugin install harness@kio-scaffold
 ## Credits
 
 Built on the structure / context / boundary principles from the Harness
-Engineering course (Team Attention · Lee Ho-yeon).
+Engineering course [Team Attention · Lee Ho-yeon](https://github.com/orgs/team-attention/)
 
 ## License
 
