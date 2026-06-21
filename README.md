@@ -57,8 +57,18 @@ concurrently — they coordinate through files under `.dev/collab/`:
 
 **Git separation:** durable records (`handoff/`, `DECISIONS.md`) are committed for
 sharing and review, while volatile live state (`BOARD.md`, `claims/`) is gitignored
-to avoid merge conflicts. It's **opt-in** — single-agent projects skip it entirely
-(an empty coordination folder is just noise).
+to avoid merge conflicts.
+
+**Worktree-based with symlinked shared state:** concurrent agents are isolated with
+`git worktree` (one per agent) to avoid working-tree collisions. A worktree shares
+commit history but *not* ignored files — so the gitignored `BOARD.md` and `claims/`
+would fork per worktree and break coordination. The rule: symlink those volatile
+files in each worktree to a single canonical copy in the primary checkout
+(`ln -sfn`), so every agent sees the same live state. Tracked files
+(`handoff/`, `DECISIONS.md`) need no symlink — git syncs them.
+
+It's **opt-in** — single-agent projects skip it entirely (an empty coordination
+folder is just noise).
 
 ## Repository layout
 

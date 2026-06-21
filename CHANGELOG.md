@@ -3,6 +3,20 @@
 All notable changes to this project are documented here.
 This project adheres to [Semantic Versioning](https://semver.org/).
 
+## [0.3.0] — 2026-06-21
+
+### Added
+- **Worktree-based collaboration with symlinked shared state** for the
+  `.dev/collab/` convention. Concurrent agents are isolated with `git worktree`
+  (one per agent). Since a worktree shares commit history but *not* ignored files,
+  the gitignored live coordination surface (`BOARD.md`, `claims/`) would fork per
+  worktree — so the convention now requires symlinking those volatile files in each
+  worktree to a single canonical copy in the primary checkout (`ln -sfn`). Tracked
+  files (`handoff/`, `DECISIONS.md`) sync through git and are not symlinked.
+- Documented the model and setup commands in `.dev/collab/README.md`, and wired the
+  rule into `project-structure.md`, `references/conventions.md`, the scaffold collab
+  option in `SKILL.md`, `BOARD.md`/`claims/` headers, and the README.
+
 ## [0.2.0] — 2026-06-20
 
 ### Added

@@ -52,7 +52,8 @@ alwaysApply: true
 - **시작 전** `collab/handoff/`(이어받을 작업)와 `collab/BOARD.md`(진행 중)를 먼저 읽는다 — 같은 작업을 중복으로 잡지 않게.
 - **선점**은 `collab/claims/<task>.md`로 표시하고 `BOARD.md`에 한 줄. **넘길 때**는 `collab/handoff/<topic>.md`에 인수인계서.
 - **git 분리**: 인계서(`handoff/`)·결정(`DECISIONS.md`)은 **커밋**, 라이브 상태(`BOARD.md`)·락(`claims/`)은 **gitignore**(휘발성·머지 충돌 방지).
-- 상세 프로토콜은 `.dev/collab/README.md`.
+- **동시 작업은 워크트리 기반**: 에이전트마다 `git worktree`로 격리한다. worktree는 추적 파일만 공유하고 ignore 파일은 따로 가지므로, gitignore된 `BOARD.md`·`claims/`는 primary 체크아웃 정본으로 **심볼릭 링크**해 한 인스턴스를 공유한다(`ln -sfn`). 추적 파일은 git으로 동기화되니 링크하지 않는다.
+- 상세 프로토콜·셋업은 `.dev/collab/README.md`.
 
 ## 설정 스코프: User → Project → Folder (하위가 상위를 덮어쓴다)
 

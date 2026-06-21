@@ -41,6 +41,7 @@ description: Bootstrap a project's AI work environment (harness) — generates C
     /.dev/collab/BOARD.md
     /.dev/collab/claims/
     ```
+  - **동시 작업이면 워크트리 기반**을 안내한다: 에이전트마다 `git worktree`로 격리하고, gitignore된 `BOARD.md`·`claims/`는 primary 정본으로 **심볼릭 링크**(`ln -sfn`)해 공유한다(추적 파일은 링크 안 함). 셋업 명령은 `collab/README.md`.
   - 단일 에이전트면 **생성하지 않는다**(빈 조율 폴더는 노이즈). CLAUDE.md의 협업 안내 줄(`<!-- 단일 에이전트면 이 줄 삭제 -->`)도 함께 정리한다.
 - **Hook** — `.claude/settings.json`의 PreToolUse로 `git push --force` 차단(CLAUDE.md 금지 + Hook = 이중 안전장치).
 
